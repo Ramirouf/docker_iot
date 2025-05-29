@@ -145,3 +145,9 @@ def logout():
     session.clear()
     logging.info("el usuario {} cerró su sesión".format(session.get("user_id")))
     return redirect(url_for('index'))
+
+@app.route('/set_theme/<theme>')
+def set_theme(theme):
+    if theme in ['light', 'dark']:
+        session['theme'] = theme
+    return redirect(request.referrer or url_for('index'))
