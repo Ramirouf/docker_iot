@@ -55,7 +55,7 @@ async def medicion(update: Update, context):
 
 async def graficos(update: Update, context):
     logging.info(update.message.text)
-    sql = f"SELECT timestamp, {update.message.text.split()[1]} FROM mediciones where id mod 2 = 0 AND timestamp >= NOW() - INTERVAL 1 DAY ORDER BY timestamp"
+    sql = f"SELECT timestamp, {update.message.text.split()[1]} FROM mediciones where id mod 2 = 0 AND timestamp >= NOW() - INTERVAL 1 DAY AND sensor_id LIKE 'sensor_1' ORDER BY timestamp"
     conn = await aiomysql.connect(host=os.environ["MARIADB_SERVER"], port=3306,
                                     user=os.environ["MARIADB_USER"],
                                     password=os.environ["MARIADB_USER_PASS"],
@@ -75,8 +75,10 @@ async def graficos(update: Update, context):
         buffer = BytesIO()
         fig.tight_layout()
         fig.savefig(buffer, format='png')
+        plt.close()
         buffer.seek(0)
         await context.bot.send_photo(chat_id=update.effective_chat.id, photo=buffer)
+        buffer.close()
     conn.close()
 
 def main():
