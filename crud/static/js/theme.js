@@ -5,16 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   const themeDropdownItems = document.querySelectorAll("[data-theme]");
   const themeLink = document.querySelector('link[rel=stylesheet][href*="bootswatch"]');
-  // Cargar preferencia guardada o usar claro
-  let theme = localStorage.getItem("theme") || "light";
-  themeLink.href = themeLinks[theme];
 
   themeDropdownItems.forEach((item) => {
     item.addEventListener("click", function (e) {
       e.preventDefault();
       const selected = this.getAttribute("data-theme");
       themeLink.href = themeLinks[selected];
-      localStorage.setItem("theme", selected);
+      fetch(`/set_theme/${selected}`, { method: "POST" });
     });
   });
 });

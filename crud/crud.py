@@ -146,8 +146,10 @@ def logout():
     logging.info("el usuario {} cerró su sesión".format(session.get("user_id")))
     return redirect(url_for('index'))
 
-@app.route('/set_theme/<theme>')
+@app.route('/set_theme/<theme>', methods=['GET', 'POST'])
 def set_theme(theme):
     if theme in ['light', 'dark']:
         session['theme'] = theme
+    if request.method == 'POST':
+        return '', 204  # No Content, para AJAX
     return redirect(request.referrer or url_for('index'))

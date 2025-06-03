@@ -29,8 +29,8 @@
             Tema
           </button>
           <ul class="dropdown-menu" aria-labelledby="themeDropdown">
-            <li><a class="dropdown-item" href="{{ url_for('set_theme', theme='light') }}">Claro</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('set_theme', theme='dark') }}">Oscuro</a></li>
+            <li><a class="dropdown-item" href="#" data-theme="light">Claro</a></li>
+            <li><a class="dropdown-item" href="#" data-theme="dark">Oscuro</a></li>
           </ul>
         </div>
         <a href="{{url_for('logout')}}" class="btn btn-secondary my-2 my-sm-0" type="submit">Salir</a>
@@ -50,6 +50,6 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
   <script src="{{url_for('static', filename='js/main.js')}}"></script>
-  <!-- <script src="{{url_for('static', filename='js/theme.js')}}"></script> -->
+  <script src="{{url_for('static', filename='js/theme.js')}}"></script>
 </body>
 </html>
